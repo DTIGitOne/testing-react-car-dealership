@@ -6,6 +6,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
 import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
+import AddCarModal from '../Comonents/AddCarModal';
 
 function HomeIcon(props: SvgIconProps) {
    return (
@@ -26,7 +27,7 @@ const Admin = () => {
          </div>
          <div className=' flex justify-between w-full pl-16 pr-16 pt-2 mb-3'>
            <h1 className=" text-6xl">Admin Panel</h1>
-           <Button variant="contained" size='large'>Add</Button>
+           <AddCarModal />
          </div>
       </div>
       <div className=' h-4/5 w-full p-16'>
