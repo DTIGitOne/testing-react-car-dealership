@@ -24,3 +24,22 @@ code {
   height: 100%;
   width: 100%;
 }
+
+.BackgroundMain {
+  height: 100%;
+  width: 100%;
+  background: linear-gradient(45deg, rgba(255,255,255,1), rgba(148,216,249,1));
+  animation: gradientMove 1s infinite alternate;
+}
+
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

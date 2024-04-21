@@ -1,7 +1,12 @@
+import BackgroundMain from "../Comonents/background";
 
 const Main = () => {
 
-   return "main";
+   return (
+      <>
+       <BackgroundMain />
+      </>
+   )
 
 }
 

@@ -12,6 +12,7 @@ import { defaultCarImage } from '../Constants/ConstantsJS';
 import { onlyNumberRegex } from '../Constants/ConstantsJS';
 import { moneyRegex } from '../Constants/ConstantsJS';
 import { imageUrlRegex } from '../Constants/ConstantsJS';
+import { addObjectToStorage } from '../Constants/ConstantsJS';
 
 //backdrop stylesheet
 const style = {
@@ -54,7 +55,7 @@ export default function AddCarModal({ isOpen }) {
 
   const handleOpen = () => setOpen(true);
 
-  const handleClose = () => {
+  const deleteFields = () => {
     //clear fields
     setBrandName("");
     setModelName("");
@@ -72,6 +73,10 @@ export default function AddCarModal({ isOpen }) {
     setImageURLError(false);
   }
 
+  const handleClose = () => {
+    deleteFields();
+  }
+
   //check on confirm if all input fields are filled
   const handleConfirmAdd = () => {
     if (brandName !== "") {
@@ -86,10 +91,20 @@ export default function AddCarModal({ isOpen }) {
 
               if(imageUrlRegex.test(imageURL)) {
 
+                const carData1 = {
+                  brandName: brandName,
+                  modelName: modelName,
+                  sliderValue: sliderValue,
+                  mileageDistance: mileageDistance,
+                  euroPrice: euroPrice,
+                  imageURL: imageURL
+              };
 
+                 addObjectToStorage(carData1);
                 
-                /*setOpen(false);
-                setBrandName("");*/   
+                 setOpen(false);
+                 deleteFields();
+                 window.location.reload();
               } else {
                 setImageURLError(true);
               }    

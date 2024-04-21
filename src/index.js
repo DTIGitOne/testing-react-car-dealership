@@ -7,6 +7,7 @@ import { Navigate, Route, BrowserRouter as Router } from 'react-router-dom';
 import { Routes } from 'react-router-dom';
 import Main from './Sites/Main';
 import Admin from './Sites/Admin';
+import CarDetail from './Comonents/CarDetail';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -16,6 +17,7 @@ root.render(
         <Route path='/Main' element={<Main />} />
         <Route path='/Admin' element={<Admin />} />
         <Route path='*' element={<Navigate to="/" />} />
+        <Route path="/car/:id" element={<CarDetail />} />
       </Routes>
     </Router>
 );

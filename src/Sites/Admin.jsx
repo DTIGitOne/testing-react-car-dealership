@@ -7,6 +7,9 @@ import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
 import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 import AddCarModal from '../Comonents/AddCarModal';
+import { useState , useEffect } from 'react';
+import ConfirmRemoveModal from '../Comonents/ConfirmModal';
+import { Link } from 'react-router-dom';
 
 function HomeIcon(props: SvgIconProps) {
    return (
@@ -16,7 +19,20 @@ function HomeIcon(props: SvgIconProps) {
    );
  }
 
+ 
+
 const Admin = () => {
+
+  const [carData, setCarData] = useState([]);
+
+    useEffect(() => {
+        const storedData = localStorage.getItem('carData');
+        if (storedData) {
+            const dataArray = JSON.parse(storedData);
+            setCarData(dataArray);
+        }
+    }, []);
+
 
    return <div className=" h-full w-full bg-slate">
       <div className=" h-1/5 flex flex-col justify-end gap-3">
@@ -37,15 +53,29 @@ const Admin = () => {
                <TableCell>Mileage</TableCell>
                <TableCell>Year</TableCell>
                <TableCell>Price</TableCell>
-               <TableCell><Button variant="text">View</Button></TableCell>
-               <TableCell><Button variant="contained" color='error'>Remove</Button></TableCell>
              </TableHead>
-
-             
+             <TableBody>
+             {carData.map(item => (
+               <TableRow key={item.id}>
+                <TableCell component="th" scope="row">
+                {item.modelName}
+              </TableCell>
+              <TableCell>{item.mileageDistance}</TableCell>
+              <TableCell>{item.sliderValue}</TableCell>
+              <TableCell>{item.euroPrice}</TableCell>
+              <TableCell>
+                <Link to={`/car/${item.id}`}>
+                  <Button variant="text">View</Button>
+                </Link>
+              </TableCell>
+              <TableCell><ConfirmRemoveModal item={item.id} itemState={carData} setItemState={setCarData} /></TableCell>
+               </TableRow>
+               ))}
+             </TableBody>         
            </Table>
       </div>
    </div>;
 
-}
+};
 
 export default Admin;
