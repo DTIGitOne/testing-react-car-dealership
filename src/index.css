@@ -40,6 +40,28 @@ code {
   top: 0;
 }
 
+/* Width of the entire scrollbar */
+::-webkit-scrollbar {
+  width: 15px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: white;
+  border-radius: 15px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #94A3B8;
+  border-radius: 15px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #6b7685;
+}
+
 @keyframes gradientMove {
   0% {
     background-position: 0% 50%;

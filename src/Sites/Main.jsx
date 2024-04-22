@@ -22,12 +22,12 @@ const Main = () => {
       <>
        <div id="rootDiv" className=' z-20 w-full flex relative flex-col gap-10 '>
          <div id="Top" className=" z-10 h-96">
-            <div className=" h-1/4 w-full flex justify-end items-center pr-8">
-              <button onClick={() => navigate("/Admin")} className=" transition-all bg-slate-400 hover:bg-slate-600 hover:scale-105 text-white p-5 pr-6 pl-6 rounded-3xl">Admin</button>
+            <div className=" h-1/4 w-full flex justify-end items-end pr-8">
+              <button onClick={() => navigate("/Admin")} className=" transition-all bg-slate-400 hover:bg-slate-600 hover:scale-105 text-white p-4 pr-6 pl-6 rounded-3xl">Admin</button>
             </div>
             <div className=" text-white  flex justify-center items-center text-9xl h-3/4">Main</div>
          </div>
-         <div id="Bottom" className=" z-10 h-auto w-full grid grid-cols-4 gap-4 p-12 box-border">
+         <div id="Bottom" className=" z-10 h-auto w-full grid grid-cols-4 gap-5 p-16 box-border">
               {carData.map(car => (
                 <CardCar key={car.id} id={car.id} Model={car.modelName} Brand={car.brandName} Year={car.sliderValue} Euro={car.euroPrice} Disabled={false} ImageURL={car.imageURL} />
               ))}
