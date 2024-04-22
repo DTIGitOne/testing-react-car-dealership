@@ -58,6 +58,7 @@ const names = [
    "Opel",
    "Peugeot",
    "Porsche",
+   "Pagani",
    "Renault",
    "Rolls-Royce",
    "Rover",

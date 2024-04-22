@@ -13,6 +13,7 @@ import { onlyNumberRegex } from '../Constants/ConstantsJS';
 import { moneyRegex } from '../Constants/ConstantsJS';
 import { imageUrlRegex } from '../Constants/ConstantsJS';
 import { addObjectToStorage } from '../Constants/ConstantsJS';
+import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
 //backdrop stylesheet
 const style = {
@@ -184,15 +185,21 @@ export default function AddCarModal({ isOpen }) {
                />
             </div>
 
-               <TextField inputProps={{ min: 0 }} type='number' value={mileageDistance} error={mileageError} id="standard-basic" label="Mileage" variant="standard" onChange={(e) => {setMileageDistance(e.target.value); setmileageError(false)}} />
+               <TextField inputProps={{ min: 0 }} type='number' value={mileageDistance} error={mileageError} id="standard-basic" label="Mileage(km)" variant="standard" onChange={(e) => {setMileageDistance(e.target.value); setmileageError(false)}} />
 
                <TextField inputProps={{ min: 0 }} value={euroPrice ? euroPrice : null} error={euroError} type='number' id="standard-basic" label="Price(euro)" variant="standard" onChange={(e) => {setEuroPrice(e.target.value); setEuroError(false)}} />
-
-               <TextField id="outlined-basic" error={imageURLError} label="Image(URL)" variant="outlined" onChange={(e) => {setImageURL(e.target.value); setImageURLError(false)}}/>
+               
+               <div className='w-full flex flex-col gap-2'>
+                  <div className='w-full flex'>
+                   <TextField className='w-full' id="outlined-basic" error={imageURLError} label="Image(URL)" variant="outlined" onChange={(e) => {setImageURL(e.target.value); setImageURLError(false)}}/>
+                   <Button onClick={()=> console.log("oj")}><DeleteOutlinedIcon color='error' /></Button>
+                  </div>
+                 <div className='w-full flex justify-center items-center'>Full HD Recomended</div>
+               </div>
  
             </div>
             <div className=' w-1/2 h-full flex justify-center items-center'>
-             <CardCar Model={modelName} Brand={brandName} Year={sliderValue} Euro={euroPrice} Disabled={true} ImageURL={imageURL}/>
+             <CardCar Model={modelName} Brand={brandName} Year={sliderValue} Euro={euroPrice} Disabled={true} ImageURL={imageURL} max={345} min={320}/>
             </div>
           </div>
           <div className=' h-10 w-full flex justify-end gap-7 pr-4'>

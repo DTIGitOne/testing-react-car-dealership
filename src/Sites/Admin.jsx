@@ -9,7 +9,8 @@ import SvgIcon, { SvgIconProps } from '@mui/material/SvgIcon';
 import AddCarModal from '../Comonents/AddCarModal';
 import { useState , useEffect } from 'react';
 import ConfirmRemoveModal from '../Comonents/ConfirmModal';
-import { Link } from 'react-router-dom';
+import { Link , useNavigate } from 'react-router-dom';
+
 
 function HomeIcon(props: SvgIconProps) {
    return (
@@ -25,6 +26,8 @@ const Admin = () => {
 
   const [carData, setCarData] = useState([]);
 
+  const navigate = useNavigate();
+
     useEffect(() => {
         const storedData = localStorage.getItem('carData');
         if (storedData) {
@@ -37,7 +40,7 @@ const Admin = () => {
    return <div className=" h-full w-full bg-slate">
       <div className=" h-1/5 flex flex-col justify-end gap-3">
          <div className=' flex items-center gap-1 font-normal h-1/6 pl-5'>
-            <button>
+            <button onClick={() => navigate("/Main")}>
              <HomeIcon fontSize="small" /> Home Page
             </button>
          </div>

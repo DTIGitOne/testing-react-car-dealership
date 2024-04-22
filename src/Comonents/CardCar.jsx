@@ -5,11 +5,12 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import { Link } from 'react-router-dom';
 
 export default function CardCar(props) {
    
   return (
-    <Card sx={{ maxWidth: 345 , minWidth: 320}}>
+    <Card sx={{ maxWidth: props.max , minWidth: props.min}}>        
       <CardMedia
         sx={{ height: 140 }}
         image={props.ImageURL}
@@ -27,7 +28,7 @@ export default function CardCar(props) {
         </Typography>
       </CardContent>
       <CardActions className=' flex justify-center'>
-        <Button size="medium" disabled={props.Disabled} >Details</Button>
+        <Button size="medium" disabled={props.Disabled} ><Link to={`/car/${props.id}`}>View Details</Link></Button>
       </CardActions>
     </Card>
   );

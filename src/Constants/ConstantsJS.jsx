@@ -27,24 +27,26 @@ export function addObjectToStorage(newObject) {
 
 // make 3 diffrent varients of color to randomly choose from every time
 
+const Theme1 = {
+  main: "#010A5A",
+  second: "#7054C3"
+};
 
-function getRandomColor1() {
-   const letters = '0123456789ABCDEF';
-   let color = '#';
-   for (let i = 0; i < 6; i++) {
-     color += letters[Math.floor(Math.random() * 16)];
-   }
-   return color;
- }
+const Theme2 = {
+  main: "#93A5CF",
+  second: "#E4EfE9"
+};
 
- function getRandomColor2() {
-   const letters = '0123456789ABCDEF';
-   let color = '#';
-   for (let i = 0; i < 6; i++) {
-     color += letters[Math.floor(Math.random() * 16)];
-   }
-   return color;
- }
+const Theme3 = {
+  main: "#09203F",
+  second: " #537895"
+};
+
+const ThemesArray = [Theme1 , Theme2 , Theme3];
+
+function getRandomTheme() {
+  const randomIndex = Math.floor(Math.random() * ThemesArray.length);
+  return ThemesArray[randomIndex];
+}
  
- export const randomColor1 = getRandomColor1();
- export const randomColor2 = getRandomColor2();
+ export const randomTheme = getRandomTheme();

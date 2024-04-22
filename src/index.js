@@ -7,7 +7,7 @@ import { Navigate, Route, BrowserRouter as Router } from 'react-router-dom';
 import { Routes } from 'react-router-dom';
 import Main from './Sites/Main';
 import Admin from './Sites/Admin';
-import CarDetail from './Comonents/CarDetail';
+import CarDetail from './Sites/CarDetail';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

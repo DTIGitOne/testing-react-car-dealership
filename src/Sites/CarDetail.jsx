@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams , useNavigate } from 'react-router-dom';
+import BackgroundMain from '../Comonents/background';
 
 function CarDetail() {
   const { id } = useParams();
@@ -16,12 +17,12 @@ function CarDetail() {
             const carItem = dataArray.find(item => item.id === Number(id));
 
             if (!carItem) {
-              // navigate("/Main");
+               navigate("/Main");
             } else {
                setCar(carItem);
             }
          } catch(e) {
-            // navigate("/Main");
+             navigate("/Main");
          }
       }
          
@@ -38,10 +39,10 @@ function CarDetail() {
  }
 
  return (
-   <div>
-     <h1>{car.brandName}</h1>
-     <img src={car.imageURL} alt="" />
-   </div>
+   <>
+     <div className=' z-20 h-full w-full flex justify-center items-center relative'>1</div>
+     <BackgroundMain />
+   </>
  );
 }
 
