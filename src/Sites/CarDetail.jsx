@@ -66,7 +66,7 @@ function CarDetail() {
         <div className=' h-full w-full absolute text-white flex flex-col gap-10'>
           <div className=' h-32 flex items-center'>
             <div className=' w-60 h-auto p-5 bg-white flex justify-end'>
-              <button className=' text-black text-3xl font-normal'>Go Back</button>
+              <button className=' text-black text-3xl font-normal' onClick={() => navigate(-1)}>Go Back</button>
             </div>
           </div>
            <div className=' w-full p-5'>

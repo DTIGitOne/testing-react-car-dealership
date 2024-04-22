@@ -44,9 +44,11 @@ const Theme3 = {
 
 const ThemesArray = [Theme1 , Theme2 , Theme3];
 
+//random theme generator
 function getRandomTheme() {
   const randomIndex = Math.floor(Math.random() * ThemesArray.length);
   return ThemesArray[randomIndex];
 }
  
  export const randomTheme = getRandomTheme();
+
