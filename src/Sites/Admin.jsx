@@ -36,6 +36,23 @@ const Admin = () => {
         }
     }, []);
 
+    const handleConfirmEdit = (updatedData) => {
+      // Find the index of the item in carData array
+      const index = carData.findIndex(item => item.id === updatedData.id);
+  
+      // If the item is found, update it
+      if (index !== -1) {
+        const updatedCarData = [...carData];
+        updatedCarData[index] = updatedData;
+        setCarData(updatedCarData);
+  
+        // Update localStorage with the new data
+        localStorage.setItem('carData', JSON.stringify(updatedCarData));
+      } else {
+        // Handle case when item is not found
+      }
+    };
+
     //open modal from id
     const handleOpenModal = (id) => {
       setOpenModalId(id);
@@ -51,7 +68,7 @@ const Admin = () => {
          </div>
          <div className=' flex justify-between w-full pl-16 pr-16 pt-2 mb-3'>
            <h1 className=" text-6xl">Admin Panel</h1>
-           <AddCarModal itemText="Add"/>
+           <AddCarModal itemText="Add" />
          </div>
       </div>
       <div className=' h-4/5 w-full p-16'>
@@ -78,7 +95,7 @@ const Admin = () => {
               </TableCell>
               <TableCell>
               <div key={item.id}>
-                <AddCarModal itemText="Edit" initialData={item}/>
+                <AddCarModal itemText="Edit" initialData={item} onConfirm={handleConfirmEdit} />
               </div>
               </TableCell>
               <TableCell><ConfirmRemoveModal item={item.id} itemState={carData} setItemState={setCarData} /></TableCell>

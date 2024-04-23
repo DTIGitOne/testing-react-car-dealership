@@ -3,6 +3,8 @@ import { useParams , useNavigate } from 'react-router-dom';
 import BackgroundMain from '../Comonents/background';
 import ScrollForMore from '../Comonents/ScrollForMore';
 import ScrollToTopBottom from '../Comonents/ScrollToBottom';
+import { defaultCarImage } from '../Constants/ConstantsJS';
+
 
 function CarDetail() {
   const { id } = useParams();
@@ -59,7 +61,7 @@ function CarDetail() {
            </div>
            <ScrollForMore />
         </div>
-        <img src={car.imageURL} alt="" className=' object-cover bg-center bg-top w-full	'/>
+        <img src={car.imageURL} alt="" className=' object-cover bg-center bg-top w-full	' alt={defaultCarImage}/>
         <div id='detailsDiv' className='w-full flex flex-col' style={ {height: 850} }>
           <div className=' w-full h-1/4 text-8xl flex justify-center items-center'>Details</div>
           <div className=' flex h-full w-full font-normal text-4xl '>

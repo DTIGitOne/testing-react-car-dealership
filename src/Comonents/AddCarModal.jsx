@@ -33,7 +33,7 @@ function valuetext(value) {
 }
 
 //whole component
-export default function AddCarModal({ itemText, initialData }) {
+export default function AddCarModal({ itemText, initialData, onConfirm  }) {
   //useState hooks
   const [open, setOpen] = useState(false);
   const [sliderValue, setSliderValue] = useState(2025);
@@ -47,6 +47,15 @@ export default function AddCarModal({ itemText, initialData }) {
   const [mileageError , setmileageError] = useState(false); //number
   const [euroError , setEuroError] = useState(false); //number
   const [imageURLError , setImageURLError] = useState(false);
+
+
+
+
+
+
+
+  //fix the verification method becouse the confrim button on the add car is reading it as edit button becouse 
+  //the verification is reading it as not empty string
 
   const areAllFieldsFilled = () => {
     return brandName !== "" && modelName !== "" && mileageDistance !== 0 && euroPrice !== 0 && imageURL !== defaultCarImage;
@@ -149,8 +158,50 @@ export default function AddCarModal({ itemText, initialData }) {
   }
 
   const handleConfirmAdd2 = () => {
-    console.log("ok");
-  }
+    // Check if initialData exists and has an id property
+    if (initialData && initialData.id) {
+      if (brandName !== "") {
+        setBrandError(false);
+  
+        if (modelName !== "") {
+          if (onlyNumberRegex.test(mileageDistance)) {
+            if (moneyRegex.test(euroPrice)) {
+              if (imageUrlRegex.test(imageURL)) {
+                const updatedData = {
+                  id: initialData.id,
+                  brandName: brandName,
+                  modelName: modelName,
+                  sliderValue: sliderValue,
+                  mileageDistance: mileageDistance,
+                  euroPrice: euroPrice,
+                  imageURL: imageURL
+                };
+  
+                onConfirm(updatedData);
+  
+                setOpen(false);
+                deleteFields();
+                window.location.reload();
+              } else {
+                setImageURLError(true);
+              }
+            } else {
+              setEuroError(true);
+            }
+          } else {
+            setmileageError(true);
+          }
+        } else {
+          setModelError(true);
+        }
+      } else {
+        setBrandError(true);
+      }
+    } else {
+      // Handle case when initialData is null or does not have an id property
+      console.error("Initial data is null or missing id property");
+    }
+  };
   
   const handleBrandChange = (value) => {
     setBrandName(value); //brandname display
@@ -215,7 +266,7 @@ export default function AddCarModal({ itemText, initialData }) {
                
                <div className='w-full flex flex-col gap-2'>
                   <div className='w-full flex'>
-                   <TextField value={imageURL} className='w-full' id="outlined-basic" error={imageURLError} label="Image(URL)" variant="outlined" onChange={(e) => {setImageURL(e.target.value); setImageURLError(false)}}/>
+                   <TextField  className='w-full' id="outlined-basic" error={imageURLError} label="Image(URL)" variant="outlined" onChange={(e) => {setImageURL(e.target.value); setImageURLError(false)}}/>
                   </div>
                  <div className='w-full flex justify-center items-center'>Full HD Recomended</div>
                </div>
