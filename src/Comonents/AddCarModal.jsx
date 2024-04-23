@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import TextField from '@mui/material/TextField';
 import Slider from '@mui/material/Slider';
-import { useState } from 'react';
+import { useState , useEffect } from 'react';
 import CardCar from './CardCar';
 import BrandSelect from './BrandSelector';
 import { defaultCarImage } from '../Constants/ConstantsJS';
@@ -13,7 +13,6 @@ import { onlyNumberRegex } from '../Constants/ConstantsJS';
 import { moneyRegex } from '../Constants/ConstantsJS';
 import { imageUrlRegex } from '../Constants/ConstantsJS';
 import { addObjectToStorage } from '../Constants/ConstantsJS';
-import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
 
 //backdrop stylesheet
 const style = {
@@ -34,7 +33,7 @@ function valuetext(value) {
 }
 
 //whole component
-export default function AddCarModal({ isOpen }) {
+export default function AddCarModal({ itemText, initialData }) {
   //useState hooks
   const [open, setOpen] = useState(false);
   const [sliderValue, setSliderValue] = useState(2025);
@@ -49,12 +48,25 @@ export default function AddCarModal({ isOpen }) {
   const [euroError , setEuroError] = useState(false); //number
   const [imageURLError , setImageURLError] = useState(false);
 
+  useEffect(() => {
+    if (initialData) {
+      handleBrandChange(initialData.brandName);
+      setModelName(initialData.modelName);
+      setSliderValue(initialData.sliderValue);
+      setMileageDistance(initialData.mileageDistance);
+      setEuroPrice(initialData.euroPrice);
+      setImageURL(initialData.imageURL);
+    }
+  }, [initialData]);
+
   //always display a default image
   if (imageURL === "") {
     setImageURL(defaultCarImage);
   }
 
-  const handleOpen = () => setOpen(true);
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
   const deleteFields = () => {
     //clear fields
@@ -76,6 +88,8 @@ export default function AddCarModal({ isOpen }) {
 
   const handleClose = () => {
     deleteFields();
+    setOpen(false);
+    window.location.reload();
   }
 
   //check on confirm if all input fields are filled
@@ -100,6 +114,8 @@ export default function AddCarModal({ isOpen }) {
                   euroPrice: euroPrice,
                   imageURL: imageURL
               };
+
+              
 
                  addObjectToStorage(carData1);
                 
@@ -144,7 +160,7 @@ export default function AddCarModal({ isOpen }) {
   return (
     <div> 
       <Button variant="contained" size="large" onClick={handleOpen}> 
-        Add
+        {itemText}
       </Button>
       <Modal
         open={open}
@@ -156,9 +172,9 @@ export default function AddCarModal({ isOpen }) {
           <div className=' h-full w-full flex'>
             <div className=' flex flex-col w-1/2 h-full justify-around'>
               
-               <BrandSelect  brandName={brandName} onBrandChange={handleBrandChange} inputError={brandError}/>
+               <BrandSelect brandName={brandName} onBrandChange={handleBrandChange} inputError={brandError}/>
               
-               <TextField error={modelError} id="standard-basic" label="Model Name" variant="standard" onChange={(e) => {setModelName(e.target.value); setModelError(false)}} />
+               <TextField error={modelError} value={modelName} id="standard-basic" label="Model Name" variant="standard" onChange={(e) => {setModelName(e.target.value); setModelError(false)}} />
 
             <div>
               <Box sx={{ width: 466 }}>
@@ -191,15 +207,13 @@ export default function AddCarModal({ isOpen }) {
                
                <div className='w-full flex flex-col gap-2'>
                   <div className='w-full flex'>
-                   <TextField className='w-full' id="outlined-basic" error={imageURLError} label="Image(URL)" variant="outlined" onChange={(e) => {setImageURL(e.target.value); setImageURLError(false)}}/>
-                   <Button onClick={()=> console.log("oj")}><DeleteOutlinedIcon color='error' /></Button>
+                   <TextField value={imageURL} className='w-full' id="outlined-basic" error={imageURLError} label="Image(URL)" variant="outlined" onChange={(e) => {setImageURL(e.target.value); setImageURLError(false)}}/>
                   </div>
                  <div className='w-full flex justify-center items-center'>Full HD Recomended</div>
                </div>
- 
             </div>
             <div className=' w-1/2 h-full flex justify-center items-center'>
-             <CardCar Model={modelName} Brand={brandName} Year={sliderValue} Euro={euroPrice} Disabled={true} ImageURL={imageURL} max={345} min={320}/>
+             <CardCar Model={modelName} Brand={brandName} Year={sliderValue} Euro={parseFloat(euroPrice)} Disabled={true} ImageURL={imageURL} max={345} min={320}/>
             </div>
           </div>
           <div className=' h-10 w-full flex justify-end gap-7 pr-4'>

@@ -4,6 +4,7 @@ import { useNavigate , Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import CardCar from "../Comonents/CardCar";
 
+
 const Main = () => {
 
    const navigate = useNavigate();
@@ -29,7 +30,7 @@ const Main = () => {
          </div>
          <div id="Bottom" className=" z-10 h-auto w-full grid grid-cols-4 gap-5 p-16 box-border">
               {carData.map(car => (
-                <CardCar key={car.id} id={car.id} Model={car.modelName} Brand={car.brandName} Year={car.sliderValue} Euro={car.euroPrice} Disabled={false} ImageURL={car.imageURL} />
+                <CardCar key={car.id} id={car.id} Model={car.modelName} Brand={car.brandName} Year={car.sliderValue} Euro={parseFloat(car.euroPrice)} Disabled={false} ImageURL={car.imageURL} />
               ))}
          </div>
          <BackgroundMain className="absolute inset-0 z-10"/>

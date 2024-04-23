@@ -20,11 +20,11 @@ function HomeIcon(props: SvgIconProps) {
    );
  }
 
- 
 
 const Admin = () => {
 
   const [carData, setCarData] = useState([]);
+  const [openModalId, setOpenModalId] = useState(null);
 
   const navigate = useNavigate();
 
@@ -36,6 +36,11 @@ const Admin = () => {
         }
     }, []);
 
+    //open modal from id
+    const handleOpenModal = (id) => {
+      setOpenModalId(id);
+    };
+
 
    return <div className=" h-full w-full bg-slate">
       <div className=" h-1/5 flex flex-col justify-end gap-3">
@@ -46,7 +51,7 @@ const Admin = () => {
          </div>
          <div className=' flex justify-between w-full pl-16 pr-16 pt-2 mb-3'>
            <h1 className=" text-6xl">Admin Panel</h1>
-           <AddCarModal />
+           <AddCarModal itemText="Add"/>
          </div>
       </div>
       <div className=' h-4/5 w-full p-16'>
@@ -70,6 +75,11 @@ const Admin = () => {
                 <Link to={`/car/${item.id}`}>
                   <Button variant="text">View</Button>
                 </Link>
+              </TableCell>
+              <TableCell>
+              <div key={item.id}>
+                <AddCarModal itemText="Edit" initialData={item}/>
+              </div>
               </TableCell>
               <TableCell><ConfirmRemoveModal item={item.id} itemState={carData} setItemState={setCarData} /></TableCell>
                </TableRow>

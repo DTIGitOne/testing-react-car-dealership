@@ -6,9 +6,9 @@ import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { Link } from 'react-router-dom';
+import { formatNumberWithCommas } from '../Constants/ConstantsJS';
 
 export default function CardCar(props) {
-   
   return (
     <Card sx={{ maxWidth: props.max , minWidth: props.min}}>        
       <CardMedia
@@ -24,7 +24,7 @@ export default function CardCar(props) {
           {props.Year}
         </Typography>
         <Typography gutterBottom variant="h6" component="div" className=' flex justify-center'>
-          {props.Euro}€
+          {formatNumberWithCommas(props.Euro)}€
         </Typography>
       </CardContent>
       <CardActions className=' flex justify-center'>

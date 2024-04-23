@@ -52,3 +52,7 @@ function getRandomTheme() {
  
  export const randomTheme = getRandomTheme();
 
+//comas for money amount
+export function formatNumberWithCommas(number) {
+  return number.toLocaleString();
+}

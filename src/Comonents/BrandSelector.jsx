@@ -72,7 +72,8 @@ const names = [
    "Tesla",
    "Toyota",
    "Volkswagen",
-   "Volvo"
+   "Volvo",
+   "Yugo"
 ];
 
 export default function BasicSelect({ selectedBrand, onBrandChange , inputError }) {

@@ -1,31 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useParams , useNavigate } from 'react-router-dom';
 import BackgroundMain from '../Comonents/background';
+import ScrollForMore from '../Comonents/ScrollForMore';
+import ScrollToTopBottom from '../Comonents/ScrollToBottom';
 
 function CarDetail() {
   const { id } = useParams();
   const [car, setCar] = useState(null);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
 
-    useEffect(() => {
-        function handleScroll() {
-            const currentScrollPos = window.pageYOffset;
-            if (prevScrollPos > currentScrollPos) {
-                // Scrolling up
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            }
-            setPrevScrollPos(currentScrollPos);
-        }
-
-        window.addEventListener('scroll', handleScroll);
-        
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, [prevScrollPos]);
+  
   
   const navigate = useNavigate();
 
@@ -73,10 +57,46 @@ function CarDetail() {
              <div className=' text-8xl font-normal mb-4'>{car.brandName} <span className=' font-thin'>{car.modelName}</span></div>
              <div className=' text-5xl ml-4 font-thin'>{car.sliderValue}</div>
            </div>
+           <ScrollForMore />
         </div>
         <img src={car.imageURL} alt="" className=' object-cover bg-center bg-top w-full	'/>
-        <div id='detailsDiv' className=' h-60 w-full'></div>
+        <div id='detailsDiv' className='w-full flex flex-col' style={ {height: 850} }>
+          <div className=' w-full h-1/4 text-8xl flex justify-center items-center'>Details</div>
+          <div className=' flex h-full w-full font-normal text-4xl '>
+           <div id='leftDiv' className=' w-1/2 h-full flex flex-col justify-around pl-8 pb-4'>
+            <div>
+              <div>Brand:</div>
+              <span className=' font-light text-3xl'>{car.brandName}</span>
+            </div>
+            <div>
+              <div>Model:</div>
+              <span className=' font-light text-3xl'>{car.modelName}</span>
+            </div>
+            <div>
+              <div>Year:</div>
+              <span className=' font-light text-3xl'>{car.sliderValue}</span>
+            </div>
+            <div>
+              <div>Mileage:</div>
+              <span className=' font-light text-3xl'>{car.mileageDistance}</span>
+            </div>
+            <div>
+              <div>Price:</div>
+              <span className=' font-light text-3xl'>{car.euroPrice}</span>
+            </div>
+            <div>
+              <div>Contact:</div>
+              <span className=' font-light text-3xl'>email@gmail.com</span>
+            </div>
+           </div>
+           <div id='rightDiv' className=' w-1/2 h-full flex items-center text-8xl font-thin text-center'>
+              No aditional <br />
+              information provided
+           </div>
+          </div>
+        </div>
       </div>
+      <ScrollToTopBottom />
      </div>
    </>
  );
