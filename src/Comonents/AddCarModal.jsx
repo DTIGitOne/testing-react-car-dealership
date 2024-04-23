@@ -48,6 +48,10 @@ export default function AddCarModal({ itemText, initialData }) {
   const [euroError , setEuroError] = useState(false); //number
   const [imageURLError , setImageURLError] = useState(false);
 
+  const areAllFieldsFilled = () => {
+    return brandName !== "" && modelName !== "" && mileageDistance !== 0 && euroPrice !== 0 && imageURL !== defaultCarImage;
+  };
+
   useEffect(() => {
     if (initialData) {
       handleBrandChange(initialData.brandName);
@@ -143,6 +147,10 @@ export default function AddCarModal({ itemText, initialData }) {
       setBrandError(true);
     }
   }
+
+  const handleConfirmAdd2 = () => {
+    console.log("ok");
+  }
   
   const handleBrandChange = (value) => {
     setBrandName(value); //brandname display
@@ -218,7 +226,7 @@ export default function AddCarModal({ itemText, initialData }) {
           </div>
           <div className=' h-10 w-full flex justify-end gap-7 pr-4'>
             <Button variant="contained" color='error' onClick={handleClose}>Cancel</Button>
-            <Button variant="text" onClick={handleConfirmAdd}>Confirm</Button>
+            <Button variant="text" onClick={areAllFieldsFilled() ? handleConfirmAdd2 : handleConfirmAdd}>Confirm</Button>
           </div>
         </Box>
       </Modal>
