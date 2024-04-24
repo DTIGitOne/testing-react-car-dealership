@@ -48,19 +48,18 @@ export default function AddCarModal({ itemText, initialData, onConfirm  }) {
   const [euroError , setEuroError] = useState(false); //number
   const [imageURLError , setImageURLError] = useState(false);
 
-
-
-
-
-
-
-  //fix the verification method becouse the confrim button on the add car is reading it as edit button becouse 
-  //the verification is reading it as not empty string
-
+  //check if data is being edited or added
   const areAllFieldsFilled = () => {
-    return brandName !== "" && modelName !== "" && mileageDistance !== 0 && euroPrice !== 0 && imageURL !== defaultCarImage;
+    if (initialData && initialData.id) {
+      // Editing existing data
+      handleConfirmAdd2();
+    } else {
+      // Adding new data
+      handleConfirmAdd();
+    }
   };
 
+  //edit data
   useEffect(() => {
     if (initialData) {
       handleBrandChange(initialData.brandName);
@@ -105,8 +104,9 @@ export default function AddCarModal({ itemText, initialData, onConfirm  }) {
     window.location.reload();
   }
 
-  //check on confirm if all input fields are filled
+  //check on confirm if all input fields are filled (add)
   const handleConfirmAdd = () => {
+    console.log("conforim1")
     if (brandName !== "") {
   
       setBrandError(false);
@@ -157,7 +157,9 @@ export default function AddCarModal({ itemText, initialData, onConfirm  }) {
     }
   }
 
+  //conforim for editing mode
   const handleConfirmAdd2 = () => {
+    console.log("conforim2")
     // Check if initialData exists and has an id property
     if (initialData && initialData.id) {
       if (brandName !== "") {
@@ -277,7 +279,7 @@ export default function AddCarModal({ itemText, initialData, onConfirm  }) {
           </div>
           <div className=' h-10 w-full flex justify-end gap-7 pr-4'>
             <Button variant="contained" color='error' onClick={handleClose}>Cancel</Button>
-            <Button variant="text" onClick={areAllFieldsFilled() ? handleConfirmAdd2 : handleConfirmAdd}>Confirm</Button>
+            <Button variant="text" onClick={areAllFieldsFilled}>Confirm</Button>
           </div>
         </Box>
       </Modal>
