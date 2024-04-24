@@ -95,7 +95,7 @@ const Admin = () => {
               </TableCell>
               <TableCell>
               <div key={item.id}>
-                <AddCarModal itemText="Edit" initialData={item} onConfirm={handleConfirmEdit} />
+                <AddCarModal itemText="Edit" initialData={item} onConfirm={handleConfirmEdit}  />
               </div>
               </TableCell>
               <TableCell><ConfirmRemoveModal item={item.id} itemState={carData} setItemState={setCarData} /></TableCell>

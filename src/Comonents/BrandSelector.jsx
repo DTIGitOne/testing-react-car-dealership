@@ -77,7 +77,7 @@ const names = [
 ];
 
 export default function BasicSelect({ selectedBrand, onBrandChange , inputError }) {
-   const [brand, setBrand] = useState('');
+   const [brand, setBrand] = useState(selectedBrand);
  
    const handleChange = (event) => {
       const selectedBrand = event.target.value;

@@ -33,7 +33,7 @@ function valuetext(value) {
 }
 
 //whole component
-export default function AddCarModal({ itemText, initialData, onConfirm  }) {
+export default function AddCarModal({ itemText, initialData, onConfirm }) {
   //useState hooks
   const [open, setOpen] = useState(false);
   const [sliderValue, setSliderValue] = useState(2025);
@@ -56,6 +56,16 @@ export default function AddCarModal({ itemText, initialData, onConfirm  }) {
     } else {
       // Adding new data
       handleConfirmAdd();
+    }
+  };
+
+  const areAllFieldsFilled2 = () => {
+    if (initialData && initialData.id) {
+      // Editing existing data
+      handleClose2();
+    } else {
+      // Adding new data
+      handleClose();
     }
   };
 
@@ -101,12 +111,14 @@ export default function AddCarModal({ itemText, initialData, onConfirm  }) {
   const handleClose = () => {
     deleteFields();
     setOpen(false);
-    window.location.reload();
+  }
+
+  const handleClose2 = () => {
+    setOpen(false);
   }
 
   //check on confirm if all input fields are filled (add)
   const handleConfirmAdd = () => {
-    console.log("conforim1")
     if (brandName !== "") {
   
       setBrandError(false);
@@ -128,7 +140,6 @@ export default function AddCarModal({ itemText, initialData, onConfirm  }) {
                   imageURL: imageURL
               };
 
-              
 
                  addObjectToStorage(carData1);
                 
@@ -159,7 +170,6 @@ export default function AddCarModal({ itemText, initialData, onConfirm  }) {
 
   //conforim for editing mode
   const handleConfirmAdd2 = () => {
-    console.log("conforim2")
     // Check if initialData exists and has an id property
     if (initialData && initialData.id) {
       if (brandName !== "") {
@@ -183,7 +193,6 @@ export default function AddCarModal({ itemText, initialData, onConfirm  }) {
   
                 setOpen(false);
                 deleteFields();
-                window.location.reload();
               } else {
                 setImageURLError(true);
               }
@@ -233,7 +242,7 @@ export default function AddCarModal({ itemText, initialData, onConfirm  }) {
           <div className=' h-full w-full flex'>
             <div className=' flex flex-col w-1/2 h-full justify-around'>
               
-               <BrandSelect brandName={brandName} onBrandChange={handleBrandChange} inputError={brandError}/>
+               <BrandSelect selectedBrand={initialData ? initialData.brandName : ''} onBrandChange={handleBrandChange} inputError={brandError}/>
               
                <TextField error={modelError} value={modelName} id="standard-basic" label="Model Name" variant="standard" onChange={(e) => {setModelName(e.target.value); setModelError(false)}} />
 
@@ -278,7 +287,7 @@ export default function AddCarModal({ itemText, initialData, onConfirm  }) {
             </div>
           </div>
           <div className=' h-10 w-full flex justify-end gap-7 pr-4'>
-            <Button variant="contained" color='error' onClick={handleClose}>Cancel</Button>
+            <Button variant="contained" color='error' onClick={areAllFieldsFilled2}>Cancel</Button>
             <Button variant="text" onClick={areAllFieldsFilled}>Confirm</Button>
           </div>
         </Box>
