@@ -28,8 +28,8 @@ export function addObjectToStorage(newObject) {
 // make 3 diffrent varients of color to randomly choose from every time
 
 const Theme1 = {
-  main: "#5e5661",
-  second: "#d9d9d9"
+  main: "#101010",
+  second: "#242424"
 };
 
 const Theme2 = {

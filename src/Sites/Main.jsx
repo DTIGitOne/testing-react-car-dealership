@@ -21,7 +21,7 @@ const Main = () => {
 
    return (
       <>
-       <div id="rootDiv" className=' z-20 h-full w-full flex relative flex-col gap-10 '>
+       <div id="rootDiv" className=' z-20 w-full flex relative flex-col gap-10 '>
          <div id="Top" className=" z-10 h-96">
             <div className=" h-1/4 w-full flex justify-end items-end pr-8">
               <button onClick={() => navigate("/Admin")} className=" transition-all bg-slate-400 hover:bg-slate-600 hover:scale-105 text-white p-4 pr-6 pl-6 rounded-3xl">Admin</button>

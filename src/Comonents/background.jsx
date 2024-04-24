@@ -1,6 +1,6 @@
 import { randomTheme } from '../Constants/ConstantsJS';
 
-const BackgroundMain = ({ windowSize }) => {
+const BackgroundMain = () => {
    
    const backgroundStyle = {
       background: `linear-gradient(45deg, ${randomTheme.main}, ${randomTheme.second})`
