@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useParams , useNavigate } from 'react-router-dom';
-import BackgroundMain from '../Comonents/background';
 import ScrollForMore from '../Comonents/ScrollForMore';
 import ScrollToTopBottom from '../Comonents/ScrollToBottom';
 import { defaultCarImage } from '../Constants/ConstantsJS';

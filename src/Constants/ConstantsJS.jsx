@@ -22,37 +22,6 @@ export function addObjectToStorage(newObject) {
    localStorage.setItem('carData', JSON.stringify(dataArray));
 }
 
-//random hexcode color generator
-
-
-// make 3 diffrent varients of color to randomly choose from every time
-
-const Theme1 = {
-  main: "#101010",
-  second: "#242424"
-};
-
-const Theme2 = {
-  main: "#93A5CF",
-  second: "#E4EfE9"
-};
-
-const Theme3 = {
-  main: "#4d4d4d",
-  second: "#000000"
-};
-
-const ThemesArray = [Theme1 , Theme2 , Theme3];
-
-//random theme generator
-function getRandomTheme() {
-  const randomIndex = Math.floor(Math.random() * ThemesArray.length);
-  return ThemesArray[randomIndex];
-}
- 
- export const randomTheme = getRandomTheme();
-
-//comas for money amount
 export function formatNumberWithCommas(number) {
   return number.toLocaleString();
 }
